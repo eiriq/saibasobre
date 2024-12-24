@@ -3,155 +3,165 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Página de Namoro</title>
+    <title>Surpresa</title>
     <style>
         :root {
-            --background-color: #ffe6e9;
-            --primary-color: #ff5c8a;
-            --secondary-color: #ffffff;
-            --text-color: #4a4a4a;
-            --heart-color: #ff2e63;
+            --background-gradient: linear-gradient(135deg, #1f1c2c, #928dab);
+            --text-color: #ffffff;
+            --accent-color: #ff6f61;
+            --button-hover: #ff9581;
         }
 
         body {
             margin: 0;
             padding: 0;
-            background-color: var(--background-color);
-            font-family: 'Arial', sans-serif;
+            background: var(--background-gradient);
             color: var(--text-color);
-            text-align: center;
+            font-family: 'Arial', sans-serif;
             display: flex;
             flex-direction: column;
-            align-items: center;
             justify-content: center;
+            align-items: center;
             min-height: 100vh;
-        }
-
-        header {
-            background-color: var(--primary-color);
-            width: 100%;
-            padding: 1rem;
-            color: var(--secondary-color);
-            font-size: 2rem;
-            font-weight: bold;
-        }
-
-        .heart {
-            position: absolute;
-            background-color: var(--heart-color);
-            width: 20px;
-            height: 20px;
-            transform: rotate(45deg);
-            animation: float 4s ease-in-out infinite;
-        }
-
-        .heart::before,
-        .heart::after {
-            content: "";
-            position: absolute;
-            background-color: var(--heart-color);
-            border-radius: 50%;
-            width: 20px;
-            height: 20px;
-        }
-
-        .heart::before {
-            top: -10px;
-            left: 0;
-        }
-
-        .heart::after {
-            top: 0;
-            left: -10px;
-        }
-
-        @keyframes float {
-            0%, 100% {
-                transform: translateY(0) rotate(45deg);
-                opacity: 1;
-            }
-            50% {
-                transform: translateY(-30px) rotate(45deg);
-                opacity: 0.6;
-            }
-        }
-
-        .container {
-            margin: 2rem auto;
-            padding: 2rem;
-            background-color: var(--secondary-color);
-            border-radius: 10px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            max-width: 600px;
+            text-align: center;
+            overflow: hidden;
         }
 
         h1 {
-            color: var(--primary-color);
-            margin-bottom: 1rem;
+            font-size: 3rem;
+            margin-bottom: 20px;
         }
 
         p {
             font-size: 1.2rem;
-            line-height: 1.6;
+            margin-bottom: 30px;
         }
 
-        .qr-code {
-            margin: 2rem 0;
-        }
-
-        .back-btn {
-            background-color: var(--primary-color);
-            color: var(--secondary-color);
+        .download-btn {
+            background-color: var(--accent-color);
+            color: var(--text-color);
             border: none;
-            border-radius: 25px;
-            padding: 1rem 2rem;
-            font-size: 1rem;
+            border-radius: 30px;
+            padding: 15px 30px;
+            font-size: 1.2rem;
             cursor: pointer;
-            transition: background-color 0.3s;
-            text-decoration: none;
+            margin: 20px;
+            box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
 
-        .back-btn:hover {
-            background-color: var(--heart-color);
+        .download-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.3);
+            background-color: var(--button-hover);
         }
 
-        .floating-hearts {
+        .qr-container {
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            animation: fadeIn 1s ease;
+        }
+
+        .qr-container img {
+            width: 200px;
+            height: 200px;
+            margin-top: 20px;
+            box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.5);
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .decorative-elements {
             position: absolute;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
             pointer-events: none;
+            overflow: hidden;
         }
 
-        .floating-hearts .heart {
-            animation-delay: calc(var(--i) * 0.5s);
-            animation-duration: calc(var(--i) * 4s);
-            left: calc(var(--i) * 10%);
+        .decorative-elements span {
+            position: absolute;
+            display: block;
+            width: 20px;
+            height: 20px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 50%;
+            animation: move 10s infinite;
+        }
+
+        @keyframes move {
+            0% {
+                transform: translateY(0) translateX(0);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-100vh) translateX(calc(100vw - 50%));
+                opacity: 0;
+            }
+        }
+
+        .decorative-elements span:nth-child(1) {
+            top: 10%;
+            left: 20%;
+            animation-delay: 0s;
+            width: 15px;
+            height: 15px;
+        }
+
+        .decorative-elements span:nth-child(2) {
+            top: 50%;
+            left: 80%;
+            animation-delay: 2s;
+        }
+
+        .decorative-elements span:nth-child(3) {
+            top: 70%;
+            left: 30%;
+            animation-delay: 4s;
+        }
+
+        .decorative-elements span:nth-child(4) {
+            top: 20%;
+            left: 60%;
+            animation-delay: 6s;
         }
     </style>
 </head>
 <body>
-    <header>Página Especial Para Você ❤️</header>
-
-    <div class="floating-hearts">
-        <div class="heart" style="--i:1;"></div>
-        <div class="heart" style="--i:2;"></div>
-        <div class="heart" style="--i:3;"></div>
-        <div class="heart" style="--i:4;"></div>
-        <div class="heart" style="--i:5;"></div>
+    <div class="decorative-elements">
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
     </div>
 
-    <div class="container">
-        <h1>Quer namorar comigo?</h1>
-        <p>Eu fiz tudo isso para mostrar o quanto você é especial para mim. Você é a razão do meu sorriso, e cada momento ao seu lado é único. Espero que você goste desse pequeno gesto que preparei com tanto carinho.</p>
+    <h1>Surpresa!</h1>
+    <p>Tenho algo muito especial para você, mas primeiro, ouça isso:</p>
+    <button class="download-btn" onclick="downloadAudio()">Baixar Áudio</button>
 
-        <div class="qr-code">
-            <img src="code.png" alt="QR Code" style="width: 200px; height: 200px;">
-        </div>
-
-        <a href="index.html" class="back-btn">Voltar</a>
+    <div class="qr-container" id="qr-container">
+        <p>Escaneie este QR Code para continuar:</p>
+        <img src="code.png" alt="QR Code">
     </div>
+
+    <script>
+        function downloadAudio() {
+            const link = document.createElement('a');
+            link.href = 'love.mp3';
+            link.download = 'love.mp3';
+            link.click();
+            showQRCode();
+        }
+
+        function showQRCode() {
+            document.getElementById('qr-container').style.display = 'flex';
+        }
+    </script>
 </body>
 </html>
-
